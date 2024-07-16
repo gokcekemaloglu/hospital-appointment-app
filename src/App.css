@@ -1,38 +1,59 @@
-.App {
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1{
+  text-align: center;
+  margin: 20px;
+}
+
+.container{
+  padding: 2rem;
+  margin: 3rem auto;
+  max-width: 70%;
+}
+
+.doctors img{
+  width: 200px;
+  height: 200px;
+}
+
+.photos{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.doctors p{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h3{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.hastalistesi{
+  margin: 30px 20px;
+  border: 2px solid gray;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bitti{
+  text-decoration: line-through;
+  border: 2px solid gray;
+  background-color: wheat;
+  padding: 1rem;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.devam{
+  text-decoration: none;
+  border: 2px solid gray;
+  background-color: lightgreen;
+  padding: 1rem;
+  margin: 10px;
+  cursor: pointer;
 }
