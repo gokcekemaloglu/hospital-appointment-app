@@ -1,61 +1,57 @@
+import React, { useState } from 'react'
+import uuid from "react-uuid"
 
-import { useState } from "react";
-import { doctorData } from "../helper/data";
+const HastaEkle = ({hastalar, setHastalar, doktorlar}) => {
+  const [hastaName, setHastaName] = useState("")
+  const [hastaTarih, setTarih] = useState("")
 
-const HastaEkle = ({veri,setVeri,doctorResim ,setDoctorResim }) => {
+  console.log(doktorlar);
 
-    const [showForm, setShowForm] = useState(false)
-    const [choosen, setChoosen] = useState("")
+  const handleSubmitt = (e) => {
+    e.preventDefault() // direk submit yapma, önce alttaki kodlara bak
 
-  
+    setHastalar([...hastalar, {id: uuid(), text: hastaName ,day: hastaTarih, isDone: false, myDoctor: doktorlar[0].doctorName}])
 
-  const doctorInfo = (doc) => {
+    // setHastalar'a gidildiğinde hemen içinde console.log varsa çalışıverir ve biz useState'in yaptığı işi göremeyiz. Bunun için log bu sabmit fonksiyonunun dışında olmalı
 
+    setHastaName("")
+    setTarih("")
 
-
-    setDoctorResim(doctorResim.filter((x)=> x.id === doc.id))
-    setVeri(veri.filter((x)=> x.doktor === doc.doctorName))
+    // submit sonrası inputlardan value temizlemek için, hem alttaki işlemler yapılır, hemde inputlarda value={isim} yazarak browser da boşluksa boşluk isimse isim gözükmesi sağlanır
     
-    setShowForm(!showForm)
-    setChoosen(doc) 
-    
-
-  };
-
-  const submitted = (e) => {
-    e.preventDefault()
-
-    setVeri()
   }
+
+  console.log(hastalar);
+
 
   return (
     <div>
-      <h1>KLINIKUM ASHLEY</h1>
 
-      <div className="photos">
-        {doctorResim.map((doc)=> (
-          <div className="doctors" key={doc.id} onClick={()=>doctorInfo(doc)}>
-            <img src={doc.doctorImg} alt="" />
-            <h4>{doc.doctorName}</h4>
-          </div>
-        ))}
-        <div>
-        {showForm && <form onChange={submitted}>
-                <div className="formControl">
-                    <label htmlFor="text">Task</label>
-                    <input  type="text" id='text' />
-                </div>
-                <div className="formControl">
-                    <label htmlFor="day">Day & Time</label>
-                    <input  type="datetime-local" id='day' />
-                </div>
-
-                <button type="submit" className='btn btn-submit' >{choosen.doctorName} ICIN KAYIT OLUŞTUR</button>
-            </form>}
+      <form onSubmit={handleSubmitt}>
+        <div className="formControl">
+          <label htmlFor="text">Hasta Bilgileri</label>
+          <input
+            type="text"
+            id="text"
+            onChange={(e)=>setHastaName(e.target.value)}
+            value={hastaName}
+          />
         </div>
-      </div>
-    </div>
-  );
-};
 
-export default HastaEkle;
+        <div className="formControl">
+          <label htmlFor="day">Day & Time</label>
+          <input
+            type="datetime-local"
+            id="day"
+            onChange={(e)=>setTarih(e.target.value)}
+            value={hastaTarih}
+          />
+        </div>
+
+        <button type="submit" className="kayit"><span style={{color:"#6a0707"}}>{doktorlar[0].doctorName}</span> ICIN KAYIT OLUSTUR</button>
+      </form>
+    </div>
+  )
+}
+
+export default HastaEkle
